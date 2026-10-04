@@ -17,6 +17,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableDoubleStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
@@ -83,7 +84,7 @@ private const val MAX_DISPLAY_LENGTH = 10
 fun App(modifier: Modifier = Modifier) {
     var display by rememberSaveable { mutableStateOf("0") }
     var expression by rememberSaveable { mutableStateOf("") }
-    var firstOperand by rememberSaveable { mutableStateOf(0.0) }
+    var firstOperand by rememberSaveable { mutableDoubleStateOf(0.0) }
     var hasFirstOperand by rememberSaveable { mutableStateOf(false) }
     var pendingOperation by rememberSaveable { mutableStateOf<CalcOperator?>(null) }
     var isNewInput by rememberSaveable { mutableStateOf(true) }
