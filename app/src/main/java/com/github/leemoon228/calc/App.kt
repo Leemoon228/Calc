@@ -135,6 +135,12 @@ fun App(modifier: Modifier = Modifier) {
             return
         }
 
+        if (display == "-") {
+            display = "-0."
+            isNewInput = false
+            return
+        }
+
         if (isNewInput) {
             display = "0."
             isNewInput = false
@@ -147,7 +153,20 @@ fun App(modifier: Modifier = Modifier) {
     }
 
     fun toggleSign() {
-        if (display == "Error" || display == "0") return
+        if (display == "Error") return
+
+        if (display == "0" && isNewInput && pendingOperation != null) {
+            display = "-"
+            isNewInput = false
+            return
+        }
+
+        if (display == "0") return
+        if (display == "-") {
+            display = "0"
+            isNewInput = true
+            return
+        }
 
         val nextValue = if (display.startsWith("-")) display.removePrefix("-") else "-$display"
         if (nextValue.length > MAX_DISPLAY_LENGTH) return
@@ -160,6 +179,12 @@ fun App(modifier: Modifier = Modifier) {
         if (display == "Error") return
 
         if (hasFirstOperand && pendingOperation != null && isNewInput) {
+            if (operator == CalcOperator.SUBTRACT) {
+                display = "-"
+                isNewInput = false
+                return
+            }
+
             pendingOperation = operator
             expression = "${formatNumber(firstOperand)} ${operator.symbol}"
             return
