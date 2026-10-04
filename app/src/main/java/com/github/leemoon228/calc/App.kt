@@ -22,6 +22,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -312,7 +313,8 @@ fun App(modifier: Modifier = Modifier) {
                 text = display,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 16.dp),
+                    .padding(bottom = 16.dp)
+                    .testTag("result"),
                 textAlign = TextAlign.End,
                 color = MaterialTheme.colorScheme.onBackground,
                 fontSize = if (isLandscape) 42.sp else 52.sp,
